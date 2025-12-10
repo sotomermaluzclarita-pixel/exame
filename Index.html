@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LG Solar - Demo</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg-dark:#0f2630;        /* sección formulario */
+      --accent:#c96b4f;         /* botón color */
+      --muted:#9aa7ad;         /* subtítulos */
+      --white:#ffffff;
+      --container-max:1200px;
+      --hero-height:520px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: 'Montserrat', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color:#112;
+      background:#fff;
+    }
+
+    /* Navegación */
+    .nav{
+      height:72px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 28px;
+      border-bottom:1px solid rgba(0,0,0,0.03);
+    }
+    .nav .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:600;
+      color:#0a0a0a;
+    }
+    .nav .brand .dot{ width:8px;height:8px;border-radius:50%;background:var(--accent);display:inline-block; margin-left:4px;}
+    .nav nav a{
+      margin-left:28px;
+      color:#333;
+      text-decoration:none;
+      font-size:14px;
+    }
+
+    /* HERO */
+    .hero{
+      position:relative;
+      height:var(--hero-height);
+      max-height:calc(var(--hero-height));
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      background:linear-gradient(90deg, rgba(0,0,0,0.35), rgba(0,0,0,0.15));
+    }
+    .hero .bg{
+      position:absolute;
+      inset:0;
+      background-image: url('practicoimagen.jpg'); 
+      background-size:cover;
+      background-position:center right;
+      filter:brightness(0.85);
+      z-index:0;
+    }
+    .hero .content{
+      position:relative;
+      z-index:2;
+      max-width:var(--container-max);
+      margin:0 auto;
+      width:100%;
+      display:flex;
+      align-items:center;
+      padding:48px;
+    }
+    .hero .left{
+      width:56%;
+      color:var(--white);
+    }
+    .hero h1{
+      font-size:72px;
+      line-height:0.95;
+      margin:0 0 18px 0;
+      font-weight:700;
+      letter-spacing: -1px;
+    }
+    .hero p.lead{
+      margin:0 0 28px 0;
+      color:rgba(255,255,255,0.9);
+      max-width:520px;
+      font-size:16px;
+    }
+    .btn-primary{
+      display:inline-block;
+      padding:12px 20px;
+      border-radius:10px;
+      background:var(--white);
+      color:#444;
+      text-decoration:none;
+      font-weight:600;
+      box-shadow:0 2px 0 rgba(0,0,0,0.06);
+    }
+
+    /* separación entre hero y sección siguiente */
+    .spacer{
+      height:22px;
+      background:#fff;
+    }
+
+    /* FORM SECTION */
+    .form-section{
+      background:var(--bg-dark);
+      color:var(--white);
+      padding:48px 28px;
+    }
+    .form-wrapper{
+      max-width:var(--container-max);
+      margin:0 auto;
+      padding:30px;
+      box-sizing:border-box;
+    }
+    .form-header{
+      font-size:26px;
+      font-weight:700;
+      margin-bottom:22px;
+      color: #f5fbff;
+    }
+
+    form{
+      display:block;
+      width:100%;
+    }
+
+    .inputs-row{
+      display:grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap:14px;
+      align-items:end;
+    }
+
+    .inputs-row .field{
+      display:flex;
+      flex-direction:column;
+    }
+    label{
+      font-size:13px;
+      color:rgba(255,255,255,0.85);
+      margin-bottom:6px;
+    }
+    input[type="text"], input[type="email"]{
+      background:transparent;
+      border:2px solid rgba(255,255,255,0.12);
+      padding:12px 10px;
+      border-radius:2px;
+      color:var(--white);
+      outline:none;
+    }
+    input[type="text"]::placeholder,
+    input[type="email"]::placeholder{ color: rgba(255,255,255,0.4); }
+
+    /* ajustar ancho dirección (col-span) */
+    .span-2{ grid-column: span 2; }
+
+    .checkboxes{
+      margin-top:20px;
+      display:flex;
+      gap:20px;
+      align-items:center;
+    }
+    .checkboxes label{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      font-size:14px;
+      color:rgba(255,255,255,0.9);
+    }
+    .checkboxes input[type="checkbox"]{ width:16px; height:16px; }
+
+    .submit-row{
+      margin-top:26px;
+      display:flex;
+      justify-content:flex-end;
+    }
+    button[type="submit"]{
+      background:var(--accent);
+      color:white;
+      border:0;
+      padding:10px 26px;
+      border-radius:12px;
+      font-weight:700;
+      cursor:pointer;
+      box-shadow:0 4px 0 rgba(0,0,0,0.12);
+      font-size:15px;
+    }
+
+    /* Responsive */
+    @media (max-width:1000px){
+      .hero h1{ font-size:52px; }
+      .hero .left{ width:60%;}
+      .inputs-row{ grid-template-columns: repeat(2, 1fr); }
+      .span-2{ grid-column: 1 / -1; }
+      .inputs-row .field{ width:100%;}
+    }
+    @media (max-width:620px){
+      .nav{ padding:0 12px; }
+      .hero{ height:420px; }
+      .hero .content{ padding:22px; }
+      .hero h1{ font-size:40px; }
+      .inputs-row{ grid-template-columns: 1fr; }
+      .submit-row{ justify-content:center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="brand">
+      <strong>LG Solar</strong>
+      <span style="font-size:13px;color:#7b8b8f;margin-left:8px;">Mejora el medio ambiente</span>
+      <span class="dot" aria-hidden="true"></span>
+    </div>
+    <nav>
+      <a href="#">Por qué LG Solar</a>
+      <a href="#">Acerca de</a>
+      <a href="#">Contacto</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" role="banner" aria-label="Hero">
+    <div class="bg" aria-hidden="true"></div>
+    <div class="content">
+      <div class="left">
+        <h1>Son tiempos<br/>de cambio</h1>
+        <p class="lead">Genera y almacena tu propia energía. Empieza a ahorrar ya con energía limpia y ecológica.</p>
+        <a class="btn-primary" href="#form-section">Ver cómo</a>
+      </div>
+      <!-- el lado derecho queda con la imagen (en bg) -->
+    </div>
+  </section>
+
+  <div class="spacer"></div>
+
+  <!-- FORM SECTION -->
+  <section id="form-section" class="form-section" aria-label="Formulario de contacto">
+    <div class="form-wrapper">
+      <div class="form-header">¡Obtén hoy un estimado sin compromiso!</div>
+
+      <form id="leadForm" novalidate>
+        <div class="inputs-row" role="group" aria-label="datos personales">
+          <div class="field">
+            <label for="nombre">Nombre *</label>
+            <input id="nombre" name="nombre" type="text" placeholder="Tu nombre" required />
+          </div>
+
+          <div class="field">
+            <label for="apellido">Apellido *</label>
+            <input id="apellido" name="apellido" type="text" placeholder="Tu apellido" required />
+          </div>
+
+          <div class="field">
+            <label for="email">Email *</label>
+            <input id="email" name="email" type="email" placeholder="correo@ejemplo.com" required />
+          </div>
+
+          <div class="field">
+            <label for="telefono">Teléfono *</label>
+            <input id="telefono" name="telefono" type="text" placeholder="+51 9XXXXXXXX" required />
+          </div>
+
+          <div class="field span-2">
+            <label for="direccion">Dirección</label>
+            <input id="direccion" name="direccion" type="text" placeholder="Calle, ciudad" />
+          </div>
+        </div>
+
+        <div class="checkboxes">
+          <label><input type="checkbox" id="propietario" name="propietario" /> Propietario</label>
+          <label><input type="checkbox" id="empresario" name="empresario" /> Empresario</label>
+        </div>
+
+        <div class="submit-row">
+          <button type="submit">Enviar</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <script>
+    // Comportamiento del formulario: validar campos requeridos y mostrar alerta con los datos
+    const form = document.getElementById('leadForm');
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+
+      // obtener valores
+      const nombre = document.getElementById('nombre').value.trim();
+      const apellido = document.getElementById('apellido').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const telefono = document.getElementById('telefono').value.trim();
+      const direccion = document.getElementById('direccion').value.trim();
+      const propietario = document.getElementById('propietario').checked;
+      const empresario = document.getElementById('empresario').checked;
+
+      // validación simple
+      if (!nombre || !apellido || !email || !telefono) {
+        alert('Por favor completa los campos obligatorios: Nombre, Apellido, Email y Teléfono.');
+        return;
+      }
+
+      // muestra alerta con la info (puedes cambiar por un modal/otra cosa)
+      const summary =
+        'Gracias por contactarnos!\\n\\n' +
+        'Nombre: ' + nombre + '\\n' +
+        'Apellido: ' + apellido + '\\n' +
+        'Email: ' + email + '\\n' +
+        'Teléfono: ' + telefono + '\\n' +
+        'Dirección: ' + (direccion || '-') + '\\n' +
+        'Propietario: ' + (propietario ? 'Sí' : 'No') + '\\n' +
+        'Empresario: ' + (empresario ? 'Sí' : 'No');
+
+      alert(summary);
+
+      // limpiar formulario (opcional)
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>
